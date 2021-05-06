@@ -1,0 +1,1 @@
+# Termometre_s-cakl-k-fahrenheit-
