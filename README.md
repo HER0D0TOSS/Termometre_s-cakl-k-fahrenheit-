@@ -1,1 +1,1 @@
-# Termometre_s-cakl-k-fahrenheit-
+# Termometre_sicaklik-fahrenheit
