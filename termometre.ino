@@ -5,13 +5,14 @@ int leds2 = 5;
 int ledy1 = 6;
 int ledy2 = 7;
 
-float sensor = A0;
+int dht_pin =A0;
 
-int sicaklik;
+int sensor;
+double sicaklik;
+
 float durum;
-float gerilim;
-int hesap;
-float Celcius;
+float hesap;
+
 
 void setup()
 {
@@ -22,19 +23,17 @@ void setup()
   pinMode(ledy1, OUTPUT);
   pinMode(ledy2, OUTPUT);
   
-  pinMode(sensor,INPUT);
+  pinMode(dht_pin,INPUT);
   
   Serial.begin(9600);
 }
 
 void loop()
 {
-  int sicaklik = analogRead(sensor);
-  //Serial.println(sicaklik);
-  gerilim = (sicaklik *5.0);
-  gerilim = (gerilim /1024);
-  //Serial.println(gerilim);
-  //Serial.println(hesap);
+  sensor =analogRead(dht_pin);
+  
+  sicaklik = (double)sensor/ 1024;       
+  sicaklik = sicaklik * 5;     
   celcius_cevir();
   
   if (hesap<=30){
@@ -98,17 +97,18 @@ void loop()
 }
 
 void celcius_cevir(){
-  Celcius = (gerilim - 0.5) * -100 ;
+  sicaklik = sicaklik - 0.5;               
+  sicaklik = sicaklik * 100;
   //Serial.print("CELCIUS:");
-  //Serial.println(Celcius);
+  //Serial.println(sicaklik);
   delay(2000);
   Fahrenheit();}
 
 void Fahrenheit(){
-  hesap = (Celcius*1.8)+32;
-  Serial.println("------------------------");
+  hesap = (sicaklik*1.8)+32;
+  //Serial.println("------------------------");
   Serial.print("Fahrenheit degeri:");
-  Serial.println(hesap);
-  //Serial.print("F");
-  Serial.println("------------------------");
+  Serial.print(hesap);
+  Serial.println("F");
+  //Serial.println("------------------------");
 }
